@@ -7,7 +7,7 @@ from math import log2
 import pickle
 ###
 # Parametros de entrada y ayuda:
-file_full_path = r"C:\Users\brnmm\Documents\tarae_2_comu\Insumos_proy2\solo_abc_cien.txt"
+file_full_path = r"C:\Users\brnmm\Documents\tarae_2_comu\Insumos_proy2"
 file_split_path = [];
 def myfunc(argv):
     global file_full_path, file_split_path
@@ -144,16 +144,20 @@ def generar_bin(lista, nombre_archivo):
     except Exception as e:
         print("Error al escribir la lista en el archivo binario:", str(e))
 
-# Ejemplo de uso
 
-#generar_bin(byte_string, "file_huffman_comprimido")
 
-csvfile = open ( "file huffman comprimido",'w')
+generar_bin(byte_string, "file_huffman_comprimido")
+
+csvfile = open ( "file_huffman_comprimido_csv",'w')
 writer = csv.writer(csvfile)
 writer.writerow([ str(compressed_length_bit)," bits "])
 
 for entrada in huffmanCode :
     writer.writerow ([ str(entrada),huffmanCode[entrada]])
 
-csvfile.close()
-print(len(nodes))
+csvfile.close()
+
+print("Largo del mensaje original:",len(string))
+print("Largo del codigo comprimido:",len(byte_string))
+compresion=((len(string)-len(byte_string))/len(string))*100
+print("Tasa de compresion:",compresion)
