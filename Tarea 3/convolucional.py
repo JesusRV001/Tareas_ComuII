@@ -232,9 +232,9 @@ def pass_channel (x_bin: list, target_snr_db: float) -> list:
 
 if __name__ == "__main__":
     #PARAMETERS
-    SNR = 10; #dB
-    to_plot  =1;
-    NBytes= 0;
+    SNR = 0; #dB
+    to_plot  =0;
+    NBytes= 10000;
     
     #input data set
     if NBytes == 0:
@@ -266,14 +266,17 @@ if __name__ == "__main__":
     #plot chosen path 
     if to_plot==1:
         conv.plot_trellis(path.get_path(),path.input_bits()[1:])
-        
-    print(decoded == input_bytes)
-    print(corrected_errors) #errors "corrected" by decoder
+    
+    print("SNR = ", SNR)
+    print("Encoder A")    
+    print("Decoded == input bytes?: ", decoded == input_bytes)
+    print("Errores corregidos:", corrected_errors) #errors "corrected" by decoder
     
     #COMPUTE BER HERE:
     
-    
-    
+    num_errorsA = sum([bin(input_bytes[i] ^ decoded[i]).count('1') for i in range(len(input_bytes))])
+    BER_A = num_errorsA / (len(input_bytes) * 8)  # Divide por la longitud total de bits
+    print("Bit Error Rate (BER) for encoder A:", BER_A)
     
 
     #-----------------------------------------------------------------------------
@@ -300,8 +303,15 @@ if __name__ == "__main__":
     if to_plot==1:
         conv.plot_trellis(path.get_path(),path.input_bits()[1:])
         
-    print(decoded == input_bytes)
-    print(corrected_errors) #errors "corrected" by decoder
+    print("\nEncoder B") 
+    print("Decoded == input bytes?: ", decoded == input_bytes)
+    print("Errores corregidos:", corrected_errors) #errors "corrected" by decoder
     
     #COMPUTE BER HERE:
+    
+    num_errorsB = sum([bin(input_bytes[i] ^ decoded[i]).count('1') for i in range(len(input_bytes))])
+    BER_B = num_errorsB / (len(input_bytes) * 8)  # Divide por la longitud total de bits
+    print("Bit Error Rate (BER) for encoder B:", BER_B)
+    
+
     
