@@ -14,7 +14,13 @@ def ceros(polinomio):
                 break
     return polinomio
 
-def RS(polinomio):
+def RS(polinomio_g):
+    polinomio=polinomio_g
+    ss=polinomio
+    polinomio.append(0)
+    polinomio.append(0)
+    polinomio.append(0)
+    polinomio.append(0)
     suma=GF.arithmetic_table("+")
     multi=(GF.arithmetic_table("*"))
     poli=[1,13,12,8,7]
@@ -22,15 +28,18 @@ def RS(polinomio):
     r=[]
     indice=0
     polinomio=ceros(polinomio)
-    while(len(polinomio)>len(poli)):
+    while(len(polinomio)>=len(poli)):
         r.append(int(GF(poli[0]*polinomio[0])))
         resta=[]
         for i in range(len(poli)):
             resta.append(int(GF(r[-1])*GF(poli[i])))
         for k in range(len(poli)):
             polinomio[k]=int(GF(polinomio[k])+GF(resta[k]))
+        for i in range(len(poli)-1):
+            if(polinomio[i+1]==0):
+                r.append(0)
         polinomio=ceros(polinomio)
     print("residuo=   ",polinomio,)
-    print("resultado  ",r)
+    print("cociente=  ",r)
     return polinomio
 RS([7,5,2,13,6,3,4,7,11,6,0])
