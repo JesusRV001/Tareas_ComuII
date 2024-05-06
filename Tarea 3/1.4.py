@@ -42,4 +42,47 @@ def RS(polinomio_g):
     print("residuo=   ",polinomio,)
     print("cociente=  ",r)
     return polinomio
-RS([7,5,2,13,6,3,4,7,11,6,0])
+
+def deRS(polinomio_g):
+    polinomio=polinomio_g
+    ss=polinomio
+    poli=[1,13,12,8,7]
+    largo=len(polinomio)
+    r=[]
+    indice=0
+    polinomio=ceros(polinomio)
+    while(len(polinomio)>=len(poli)):
+        r.append(int(GF(poli[0]*polinomio[0])))
+        resta=[]
+        for i in range(len(poli)):
+            resta.append(int(GF(r[-1])*GF(poli[i])))
+        for k in range(len(poli)):
+            polinomio[k]=int(GF(polinomio[k])+GF(resta[k]))
+        for i in range(len(poli)-1):
+            if(polinomio[i+1]==0):
+                r.append(0)
+        polinomio=ceros(polinomio)
+    print("residuo=   ",polinomio,)
+    print("cociente=  ",r)
+    return polinomio
+
+
+mensaje=[7,5,2,13,6,3,4,7,11,6,0]
+poli=mensaje.copy()
+print("mensaje",mensaje)
+residuo=RS(mensaje)
+for i in range(len(residuo)):
+    poli.append(residuo[i])
+total=poli.copy()
+print("mensaje con residuo",poli)
+n_res=deRS(poli)
+if(n_res==0):
+    print("funciona")
+else:
+    print("valio madre")
+
+    
+
+
+
+    
