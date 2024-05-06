@@ -38,3 +38,13 @@ m4=GF(8)*GF(12)
 print("8*12 = ", m4)
 m5=GF(5)*GF(15)
 print("5*15 = ", m5)
+print("-----------------------------------------------------------------------")
+
+#------------- METODO POLY -------------
+print("Metodo Poly")
+coefs_i = input("Coeficientes de la matriz:")
+coefs_l = list(coefs_i) #cambio a lista
+coefs_o = [int(char) for char in coefs_l]
+poly=galois.Poly(coefs_o,field = GF)
+print("Resultado Metodo Poly:", poly)
+print("-----------------------------------------------------------------------")
